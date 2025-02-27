@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class BukuController extends Controller
 {
+    /**
+     * Menampilkan halaman katalog buku dengan fitur filter dan sort
+     */
     public function index(Request $request)
     {
         $query = Buku::query();
@@ -47,6 +50,9 @@ class BukuController extends Controller
 
 
 
+    /**
+     * Menampilkan halaman admin dengan daftar buku dan penerbit
+     */
     public function admin(Request $request)
     {
         $query = Buku::query();
@@ -85,12 +91,18 @@ class BukuController extends Controller
         return view('admin', compact('bukus', 'penerbits'));
     }
 
+    /**
+     * Menampilkan form untuk menambah buku baru
+     */
     public function create()
     {
         $penerbits = Penerbit::all();
         return view('buku.create', compact('penerbits'));
     }
 
+    /**
+     * Menyimpan data buku baru ke database
+     */
     public function store(Request $request)
     {
         try {
@@ -118,7 +130,7 @@ class BukuController extends Controller
     }
 
     /**
-     * Update buku yang sudah ada
+     * Mengupdate data buku yang sudah ada
      */
     public function update(Request $request, Buku $buku)
     {
@@ -165,6 +177,9 @@ class BukuController extends Controller
         }
     }
 
+    /**
+     * Menghapus data buku dari database
+     */
     public function destroy(Buku $buku)
     {
         try {
@@ -179,6 +194,9 @@ class BukuController extends Controller
         }
     }
 
+    /**
+     * Menampilkan daftar buku yang stoknya <= 10
+     */
     public function pengadaan()
     {
         $bukus = Buku::where('stok', '<=', 10)->get();

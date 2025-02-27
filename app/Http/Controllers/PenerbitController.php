@@ -7,17 +7,26 @@ use Illuminate\Http\Request;
 
 class PenerbitController extends Controller
 {
+    /**
+     * Menampilkan daftar semua penerbit
+     */
     public function index()
     {
         $penerbits = Penerbit::all();
         return view('penerbit.index', compact('penerbits'));
     }
 
+    /**
+     * Menampilkan form untuk membuat penerbit baru
+     */
     public function create()
     {
         return view('penerbit.create');
     }
 
+    /**
+     * Menyimpan data penerbit baru ke database
+     */
     public function store(Request $request)
     {
         try {
@@ -42,11 +51,17 @@ class PenerbitController extends Controller
         }
     }
 
+    /**
+     * Menampilkan form untuk mengedit penerbit
+     */
     public function edit(Penerbit $penerbit)
     {
         return view('penerbit.edit', compact('penerbit'));
     }
 
+    /**
+     * Mengupdate data penerbit yang sudah ada
+     */
     public function update(Request $request, Penerbit $penerbit)
     {
         try {
@@ -70,6 +85,9 @@ class PenerbitController extends Controller
         }
     }
 
+    /**
+     * Menghapus data penerbit jika tidak memiliki buku
+     */
     public function destroy(Penerbit $penerbit)
     {
         try {
